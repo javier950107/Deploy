@@ -9,12 +9,6 @@ pipeline{
     }
 
     stages{
-        stage('Gradle build'){
-            steps{
-                sh "gradle build"
-            }
-        }
-
         stage('Create docker image'){
             steps{
                 sh "docker build -t ${name_image}:${tag_version} ."
