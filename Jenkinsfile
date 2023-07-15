@@ -21,7 +21,7 @@ pipeline{
             when{
                 expression{
                     DOCKER_EXIST = sh(returnStdout: true, script: 'echo "$(docker ps -q --filter name=${name_container})"')
-                    return DOCKER_EXIST
+                    return DOCKER_EXIST != ''
                 }
             }
             steps{
