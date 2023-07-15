@@ -16,17 +16,17 @@ pipeline{
             }
         }
 
-        stage('stop/rm docker'){
-
-            steps{
-                def DOCKER_EXIST = sh(returnStdout: true, script: 'echo "$(docker ps -q --filter name=${name_container})"')
-
-                if(DOCKER_EXIST){
-                    sh "docker stop ${name_container}"
-                    sh "docker rm ${name_container}"
+        stage('stop/rm docker') {
+            when {
+                expression {
+                    def DOCKER_EXIST = sh(returnStdout: true, script: "docker ps -q --filter name=${name_container}").trim()
+                    return DOCKER_EXIST != ''
                 }
             }
-
+            steps {
+                sh "docker stop ${name_container}"
+                sh "docker rm ${name_container}"
+            }
         }
 
         stage('Create docker image'){
