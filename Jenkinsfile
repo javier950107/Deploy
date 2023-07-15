@@ -24,13 +24,7 @@ pipeline{
 
         stage('Run docker image'){
             steps{
-                sh "docker run -p ${port_image}:${port_image} --name=${name_container} ${name_image}:${tag_version} -d"
-            }
-        }
-
-        stage('Deploy'){
-            steps{
-                sh 'docker push myregistry/${name_container}'
+                sh "docker run -dp ${port_image}:${port_image} --name=${name_container} ${name_image}:${tag_version}"
             }
         }
     }
