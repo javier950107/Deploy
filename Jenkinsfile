@@ -25,8 +25,10 @@ pipeline{
                 }
             }
             steps{
-                sh "docker stop ${name_container}"
-                sh "docker rm ${name_container}"
+                script{
+                    sh "docker stop ${name_container}"
+                    sh "docker rm ${name_container}"
+                }
             }
 
         }
