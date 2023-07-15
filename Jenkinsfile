@@ -24,7 +24,7 @@ pipeline{
 
         stage('Run docker image'){
             steps{
-                sh "docker run -p ${port_image}:${port_image} --name=${name_container} ${name_image}:${tag_version}"
+                sh "docker run -p ${port_image}:${port_image} --name=${name_container} ${name_image}:${tag_version} -d"
             }
         }
     }
