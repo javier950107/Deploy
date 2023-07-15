@@ -18,14 +18,10 @@ pipeline{
 
         stage('stop/rm docker'){
 
-            when{
-                expression{
-                    DOCKER_EXIST = sh(returnStdout: true, script: 'echo "$(docker ps -q --filter name=${name_container})"')
-                    return DOCKER_EXIST != ''
-                }
-            }
             steps{
-                script{
+                DOCKER_EXIST = sh(returnStdout: true, script: 'echo "$(docker ps -q --filter name=${name_container})"')
+
+                if(DOCKER_EXIST){
                     sh "docker stop ${name_container}"
                     sh "docker rm ${name_container}"
                 }
