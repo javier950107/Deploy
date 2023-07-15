@@ -16,6 +16,21 @@ pipeline{
             }
         }
 
+        stage('stop/rm docker'){
+
+            when{
+                expression{
+                    DOCKER_EXISTS = sh(returnStdout: true, script: 'echo "${docker ps -q --filter name=${name_container}}"')
+                    return DOCKER_EXISTS != ''
+                }
+            }
+            steps{
+                sh "docker stop ${name_container}"
+                sh "docker rm ${name_container}"
+            }
+
+        }
+
         stage('Create docker image'){
             steps{
                 sh "docker build -t ${name_image}:${tag_version} ."
