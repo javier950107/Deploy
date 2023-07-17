@@ -1,0 +1,33 @@
+version: '3.7'
+
+services:
+  mysql:
+    container_name: mysql
+    image: mysql:8
+    restart: always
+    ports:
+      - "3306:3306"
+    networks:
+      - deploy
+    environment:
+      MYSQL_DATABASE: users
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+
+  demo:
+    container_name: demo
+    restart: always
+    image: demo:v3
+    ports:
+      - "3001:3001"
+    networks:
+      - deploy
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/users
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD:
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+
+networks:
+  deploy:
