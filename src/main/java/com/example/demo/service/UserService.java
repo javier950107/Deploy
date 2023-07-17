@@ -10,4 +10,5 @@ import com.example.demo.model.User;
 public interface UserService {
     public User insertUser(User user);
     public List<User> listUsers();
+    public User insert(User user);
 }
