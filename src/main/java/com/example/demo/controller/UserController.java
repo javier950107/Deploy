@@ -22,9 +22,11 @@ public class UserController {
     @PostMapping(value = "/insert")
     public ResponseEntity<?> insertUser(@RequestBody User user){
         try {
+            System.out.println(user);
             User userInserted = userServiceImpl.insertUser(user);
             return ResponseEntity.ok(userInserted);
         } catch (Exception err) {
+            System.out.println(err);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, err.getMessage());
         }
     }
