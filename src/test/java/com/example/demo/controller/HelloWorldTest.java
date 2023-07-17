@@ -24,7 +24,7 @@ public class HelloWorldTest {
     public void helloworldTest() throws Exception{
         //given
         //when
-        ResultActions response = mockMvc.perform(get("/example"));
+        ResultActions response = mockMvc.perform(get("/test"));
 
         //then
         response.andDo(print())
