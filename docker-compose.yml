@@ -6,7 +6,7 @@ services:
     image: mysql:8
     restart: always
     ports:
-      - "3306:3306"
+      - "3307:3306"
     networks:
       - deploy
     environment:
@@ -16,9 +16,9 @@ services:
   demo:
     container_name: demo
     restart: always
-    image: demo:v3
+    image: demo:v1
     ports:
-      - "3001:3001"
+      - "8001:8001"
     networks:
       - deploy
     depends_on:
