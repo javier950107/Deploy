@@ -45,14 +45,7 @@ public class UserController {
 
     @GetMapping(value="/create")
     public ResponseEntity<?> getMethodName(@RequestBody String param) {
-        System.out.println(param);
-        User newUser = new User();
-        newUser.setEmail("test");
-        newUser.setName("Name");
-
-        User userInserted = userServiceImpl.insert(newUser);
-
-        return ResponseEntity.ok(userInserted);
+        return ResponseEntity.ok("Test");
     }
     
 }
